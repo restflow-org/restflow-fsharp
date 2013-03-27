@@ -1,0 +1,17 @@
+
+imports:
+
+- classpath:/common/types.yaml
+
+types:
+
+- id: FSharpActor
+  className: org.restflow.fsharp.FSharpActor
+  singleton: false
+
+- id: FSharpActorNode
+  type: Node
+  properties:
+    actor: !inline
+      type: FSharpActor
+ 
