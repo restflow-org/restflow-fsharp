@@ -159,10 +159,10 @@ public class FSharpActor extends AugmentedScriptActor {
 		}
 		
 		public ScriptBuilder appendChangeDirectory(String path) {
-			_script.append(		"os.chdir('"	)
-				   .append( 	path			)
-				   .append(		"')"			)
-				   .append(		EOL				);
+//			_script.append(		"os.chdir('"	)
+//				   .append( 	path			)
+//				   .append(		"')"			)
+//				   .append(		EOL				);
 			return this;
 		}
 
