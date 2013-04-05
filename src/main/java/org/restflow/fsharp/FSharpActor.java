@@ -113,7 +113,7 @@ public class FSharpActor extends AugmentedScriptActor {
 		
 		private String _otos(Object value) {
 			if (value instanceof String)
-				return "\"" + value.toString() +  "\"";
+				return "\"\"\"" + value.toString() +  "\"\"\"";
 			else
 				return value.toString();
 		}

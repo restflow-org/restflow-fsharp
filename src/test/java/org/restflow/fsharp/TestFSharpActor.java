@@ -84,7 +84,7 @@ public class TestFSharpActor extends RestFlowTestCase {
 			"let disableInput input =  disabledInputs <- disabledInputs + \" \" + input" 				+ EOL +
 			"" 																							+ EOL +
 			"// initialize actor input variables"														+ EOL +
-			"let greeting = \"Goodbye\""																+ EOL +
+			"let greeting = \"\"\"Goodbye\"\"\""														+ EOL +
 			""																							+ EOL +
 			"// BEGINNING OF ORIGINAL SCRIPT"															+ EOL +
 			""																							+ EOL +

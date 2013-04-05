@@ -184,25 +184,25 @@ public class TestFSharpActorScriptBuilder extends RestFlowTestCase {
 	public void testAppendLiteralAssignment_NullType_StringValue() throws Exception {
 		_testAppendLiteralAssignment(
 			"v", "s", null, false, false,
-			"let v = \"s\"" 							+ EOL);
+			"let v = \"\"\"s\"\"\"" 					+ EOL);
 	}
 
 	public void testAppendLiteralAssignment_NullType_StringValue_Mutable() throws Exception {
 		_testAppendLiteralAssignment(
 			"v", "s", null, true, false,
-			"let mutable v = \"s\"" 					+ EOL);
+			"let mutable v = \"\"\"s\"\"\"" 			+ EOL);
 	}
 	
 	public void testAppendLiteralAssignment_NullType_StringValue_Nullable() throws Exception {
 		_testAppendLiteralAssignment(
 			"v", "s", null, false, true,
-			"let (v:'a option) = Some(\"s\")" 			+ EOL);
+			"let (v:'a option) = Some(\"\"\"s\"\"\")" 	+ EOL);
 	}
 	
 	public void testAppendLiteralAssignment_NullType_StringValue_Mutable_Nullable() throws Exception {
 		_testAppendLiteralAssignment(
 			"v", "s", null, true, true,
-			"let mutable (v:'a option) = Some(\"s\")" 	+ EOL);
+			"let mutable (v:'a option) = Some(\"\"\"s\"\"\")" 	+ EOL);
 	}
 	
 	
@@ -493,25 +493,25 @@ public class TestFSharpActorScriptBuilder extends RestFlowTestCase {
 	public void testAppendLiteralAssignment_StringType_StringValue() throws Exception {
 		_testAppendLiteralAssignment(
 			"v", "s", "String", false, false,
-			"let (v:string) = \"s\""							+ EOL);
+			"let (v:string) = \"\"\"s\"\"\""					+ EOL);
 	}
 
 	public void testAppendLiteralAssignment_StringType_StringValue_Mutable() throws Exception {
 		_testAppendLiteralAssignment(
 			"v", "s", "String", true, false,
-			"let mutable (v:string) = \"s\""					+ EOL);
+			"let mutable (v:string) = \"\"\"s\"\"\""			+ EOL);
 	}
 
 	public void testAppendLiteralAssignment_StringType_StringValue_Nullable() throws Exception {
 		_testAppendLiteralAssignment(
 			"v", "s", "String", false, true,
-			"let (v:string option) = Some(\"s\")"				+ EOL);
+			"let (v:string option) = Some(\"\"\"s\"\"\")"		+ EOL);
 	}
 
 	public void testAppendLiteralAssignment_StringType_StringValue_Mutable_Nullable() throws Exception {
 		_testAppendLiteralAssignment(
 			"v", "s", "String", true, true,
-			"let mutable (v:string option) = Some(\"s\")"		+ EOL);
+			"let mutable (v:string option) = Some(\"\"\"s\"\"\")"	+ EOL);
 	}	
 
 	
