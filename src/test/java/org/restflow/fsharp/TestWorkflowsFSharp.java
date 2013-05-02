@@ -17,7 +17,7 @@ public class TestWorkflowsFSharp extends WorkflowTestCase {
 	public void test_HelloWorld_FSharpActor_DataDrivenDirector() throws Exception {
 		_loadAndRunWorkflow("HelloWorld", _dataDrivenDirector());
 		assertEquals(_getExpectedTrace(), _runner.getTraceReport());
-		assertEquals(_getExpectedStdout(), _runner.getStdoutRecording());		
+		assertEquals(_getExpectedStdout(), _runner.getStdoutRecording());
 	}
 
 	public void test_BranchingWorkflow_FSharpActor_DataDrivenDirector() throws Exception {

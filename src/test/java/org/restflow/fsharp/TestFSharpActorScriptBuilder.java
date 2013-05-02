@@ -544,10 +544,10 @@ public class TestFSharpActorScriptBuilder extends RestFlowTestCase {
 		
 		ActorScriptBuilder builder = new FSharpActor.ScriptBuilder();
 		
-		builder.appendVariableYamlPrintStatement("var_with_string_type", "String");
+		builder.appendVariableSerializationStatement("var_with_string_type", "String");
 		
 		assertEquals(
-				"printfn \"var_with_string_type: %A\" var_with_string_type" +EOL, 	
+				"outputMap.Add(\"var_with_string_type\", var_with_string_type)" +EOL, 	
 				builder.toString()
 		);		
 	}
@@ -556,10 +556,10 @@ public class TestFSharpActorScriptBuilder extends RestFlowTestCase {
 		
 		ActorScriptBuilder builder = new FSharpActor.ScriptBuilder();
 		
-		builder.appendVariableYamlPrintStatement("var_with_integer_type", "Integer");
+		builder.appendVariableSerializationStatement("var_with_integer_type", "Integer");
 		
 		assertEquals(
-			"printfn \"var_with_integer_type: %A\" var_with_integer_type"		+ EOL,
+			"outputMap.Add(\"var_with_integer_type\", var_with_integer_type)"		+ EOL,
 			builder.toString()
 		);		
 	}
@@ -568,10 +568,10 @@ public class TestFSharpActorScriptBuilder extends RestFlowTestCase {
 		
 		ActorScriptBuilder builder = new FSharpActor.ScriptBuilder();
 		
-		builder.appendVariableYamlPrintStatement("var_with_boolean_type", "Boolean");
+		builder.appendVariableSerializationStatement("var_with_boolean_type", "Boolean");
 		
 		assertEquals(
-			"printfn \"var_with_boolean_type: %A\" var_with_boolean_type"		+ EOL,
+			"outputMap.Add(\"var_with_boolean_type\", var_with_boolean_type)"		+ EOL,
 			builder.toString()
 		);		
 	}

@@ -33,6 +33,15 @@ public class TestFSharpActor extends RestFlowTestCase {
 		assertEquals(
 			"// AUGMENTED STEP SCRIPT FOR ACTOR Hello" 													+ EOL +
 			"" 																							+ EOL +
+			"// reference required assemblies" 															+ EOL +
+			"#r \"C:/Users/tmcphillips/.m2/dll/Newtonsoft/Json/Newtonsoft.Json.dll\"" 					+ EOL +
+			"" 																							+ EOL +
+			"// access namespaces" 																		+ EOL +
+			"open System" 																				+ EOL +
+			"open System.IO" 																			+ EOL +
+			"open System.Collections.Generic" 															+ EOL +
+			"open Newtonsoft.Json" 																		+ EOL +
+			""																							+ EOL +
 			"// BEGINNING OF ORIGINAL SCRIPT" 															+ EOL +
 			"" 																							+ EOL +
 			"printfn \"Hello world!!!\";;"																+ EOL +
@@ -41,7 +50,11 @@ public class TestFSharpActor extends RestFlowTestCase {
 			"" 																							+ EOL +
 			"// signal end of output from original script" 												+ EOL +
 			"printfn \"__END_OF_SCRIPT_OUTPUT__\"" 														+ EOL +
-			"" 																							+ EOL
+			"" 																							+ EOL +
+			"// Serialization of actor outputs" 														+ EOL +
+			"let outputMap = new Dictionary<string, Object>()" 											+ EOL +
+			"let outputJson = JsonConvert.SerializeObject(outputMap)" 									+ EOL +
+			"Console.WriteLine(outputJson)" 															+ EOL
 			, actor.getAugmentedStepScript());
 		
 		// run the workflow while capturing stdout and stderr 
@@ -75,6 +88,15 @@ public class TestFSharpActor extends RestFlowTestCase {
 		assertEquals(
 			"// AUGMENTED STEP SCRIPT FOR ACTOR Hello" 													+ EOL +
 			"" 																							+ EOL +
+			"// reference required assemblies" 															+ EOL +
+			"#r \"C:/Users/tmcphillips/.m2/dll/Newtonsoft/Json/Newtonsoft.Json.dll\"" 					+ EOL +
+			"" 																							+ EOL +
+			"// access namespaces" 																		+ EOL +
+			"open System" 																				+ EOL +
+			"open System.IO" 																			+ EOL +
+			"open System.Collections.Generic" 															+ EOL +
+			"open Newtonsoft.Json" 																		+ EOL +
+			""																							+ EOL +
 			"// initialize input control variables"		 												+ EOL +
 			"let mutable enabledInputs   = \"\"" 														+ EOL +
 			"let mutable disabledInputs  = \"\"" 														+ EOL +
@@ -92,13 +114,16 @@ public class TestFSharpActor extends RestFlowTestCase {
 			"" 																							+ EOL +
 			"// END OF ORIGINAL SCRIPT" 																+ EOL +
 			"" 																							+ EOL +
-			"// signal end of output from original script" 												+ EOL +
-			"printfn \"__END_OF_SCRIPT_OUTPUT__\"" 														+ EOL +
-			"" 																							+ EOL +
-			"// render actor input control variables as yaml" 											+ EOL +
-			"printfn \"enabledInputs: %s\" enabledInputs"												+ EOL +
-			"printfn \"disabledInputs: %s\" disabledInputs" 											+ EOL +
-			""																							+ EOL
+			"// signal end of output from original script"												+ EOL +
+			"printfn \"__END_OF_SCRIPT_OUTPUT__\""														+ EOL +
+			""																							+ EOL +
+			"// Serialization of actor outputs"															+ EOL +
+			"let outputMap = new Dictionary<string, Object>()"											+ EOL +
+			"outputMap.Add(\"enabledInputs\", enabledInputs)"											+ EOL +
+			"outputMap.Add(\"disabledInputs\", disabledInputs)"											+ EOL +
+			""																							+ EOL +
+			"let outputJson = JsonConvert.SerializeObject(outputMap)"									+ EOL +
+			"Console.WriteLine(outputJson)"																+ EOL
 			, actor.getAugmentedStepScript());
 		
 		// run the workflow while capturing stdout and stderr 
@@ -127,16 +152,27 @@ public class TestFSharpActor extends RestFlowTestCase {
 		actor.configure();
 		actor.initialize();
 		
+		String userHome = System.getProperty("user.home").replaceAll("\\\\", "/");
+		
 		assertEquals(
 			"// AUGMENTED STEP SCRIPT FOR ACTOR Hello" 													+ EOL +
 			"" 																							+ EOL +
+			"// reference required assemblies" 															+ EOL +
+			"#r \"C:/Users/tmcphillips/.m2/dll/Newtonsoft/Json/Newtonsoft.Json.dll\"" 					+ EOL +
+			"" 																							+ EOL +
+			"// access namespaces" 																		+ EOL +
+			"open System" 																				+ EOL +
+			"open System.IO" 																			+ EOL +
+			"open System.Collections.Generic" 															+ EOL +
+			"open Newtonsoft.Json" 																		+ EOL +
+			""																							+ EOL +			
 			"// initialize output control variables"		 											+ EOL +
 			"let mutable enabledOutputs   = \"\"" 														+ EOL +
 			"let mutable disabledOutputs  = \"\"" 														+ EOL +
 			"" 																							+ EOL +
 			"// define functions for enabling and disabling actor outputs" 								+ EOL +
-			"let enableOutput output  =  enabledOutputs <- enabledOutputs + \" \" + output" 					+ EOL +
-			"let disableOutput output =  disabledOutputs <- disabledOutputs + \" \" + output" 					+ EOL +
+			"let enableOutput output  =  enabledOutputs <- enabledOutputs + \" \" + output" 			+ EOL +
+			"let disableOutput output =  disabledOutputs <- disabledOutputs + \" \" + output" 			+ EOL +
 			"" 																							+ EOL +
 			"// BEGINNING OF ORIGINAL SCRIPT" 															+ EOL +
 			"" 																							+ EOL +
@@ -147,13 +183,15 @@ public class TestFSharpActor extends RestFlowTestCase {
 			"// signal end of output from original script" 												+ EOL +
 			"printfn \"__END_OF_SCRIPT_OUTPUT__\"" 														+ EOL +
 			"" 																							+ EOL +
-			"// render output variables as yaml" 														+ EOL +
-			"printfn \"greeting: %A\" greeting"															+ EOL +
+			"// Serialization of actor outputs" 														+ EOL +
+			"let outputMap = new Dictionary<string, Object>()" 											+ EOL +
+			"outputMap.Add(\"greeting\", greeting)"														+ EOL +
 			"" 																							+ EOL +
-			"// render actor output control variables as yaml" 											+ EOL +
-			"printfn \"enabledOutputs: %s\" enabledOutputs" 											+ EOL +
-			"printfn \"disabledOutputs: %s\" disabledOutputs" 											+ EOL +
-			""																							+ EOL
+			"outputMap.Add(\"enabledOutputs\", enabledOutputs)" 										+ EOL +
+			"outputMap.Add(\"disabledOutputs\", disabledOutputs)" 										+ EOL +
+			"" 																							+ EOL +
+			"let outputJson = JsonConvert.SerializeObject(outputMap)"									+ EOL +
+			"Console.WriteLine(outputJson)" 															+ EOL 
 			, actor.getAugmentedStepScript());
 		
 		// run the workflow while capturing stdout and stderr 
@@ -182,6 +220,15 @@ public class TestFSharpActor extends RestFlowTestCase {
 		assertEquals(
 			"// AUGMENTED STEP SCRIPT FOR ACTOR Hello" 													+ EOL +
 			"" 																							+ EOL +
+			"// reference required assemblies" 															+ EOL +
+			"#r \"C:/Users/tmcphillips/.m2/dll/Newtonsoft/Json/Newtonsoft.Json.dll\"" 					+ EOL +
+			"" 																							+ EOL +
+			"// access namespaces" 																		+ EOL +
+			"open System" 																				+ EOL +
+			"open System.IO" 																			+ EOL +
+			"open System.Collections.Generic" 															+ EOL +
+			"open Newtonsoft.Json" 																		+ EOL +
+			""																							+ EOL +
 			"// initialize actor state variables" 														+ EOL +
 			""							 																+ EOL +
 			"// BEGINNING OF ORIGINAL SCRIPT" 															+ EOL +
@@ -193,9 +240,12 @@ public class TestFSharpActor extends RestFlowTestCase {
 			"// signal end of output from original script" 												+ EOL +
 			"printfn \"__END_OF_SCRIPT_OUTPUT__\"" 														+ EOL +
 			""							 																+ EOL +
-			"// render state variables as yaml" 														+ EOL +
-			"printfn \"greeting: %A\" greeting"															+ EOL +
-			"" 																							+ EOL
+			"// Serialization of actor outputs" 														+ EOL +
+			"let outputMap = new Dictionary<string, Object>()" 											+ EOL +
+			"outputMap.Add(\"greeting\", greeting)" 													+ EOL +
+			"" 																							+ EOL +
+			"let outputJson = JsonConvert.SerializeObject(outputMap)" 									+ EOL +
+			"Console.WriteLine(outputJson)" 															+ EOL
 			, actor.getAugmentedStepScript());
 		
 		// run the workflow while capturing stdout and stderr 
@@ -232,6 +282,15 @@ public class TestFSharpActor extends RestFlowTestCase {
 		assertEquals(
 			"// AUGMENTED STEP SCRIPT FOR ACTOR Multiplier"												+ EOL +
 			""																							+ EOL +
+			"// reference required assemblies" 															+ EOL +
+			"#r \"C:/Users/tmcphillips/.m2/dll/Newtonsoft/Json/Newtonsoft.Json.dll\"" 					+ EOL +
+			"" 																							+ EOL +
+			"// access namespaces" 																		+ EOL +
+			"open System" 																				+ EOL +
+			"open System.IO" 																			+ EOL +
+			"open System.Collections.Generic" 															+ EOL +
+			"open Newtonsoft.Json" 																		+ EOL +
+			""																							+ EOL +
 			"// initialize input control variables"		 												+ EOL +
 			"let mutable enabledInputs   = \"\"" 														+ EOL +
 			"let mutable disabledInputs  = \"\"" 														+ EOL +
@@ -261,17 +320,18 @@ public class TestFSharpActor extends RestFlowTestCase {
 			"// signal end of output from original script"												+ EOL +
 			"printfn \"__END_OF_SCRIPT_OUTPUT__\""														+ EOL +
 			""																							+ EOL +
-			"// render output variables as yaml"														+ EOL +
-			"printfn \"z: %A\" z"																		+ EOL +
+			"// Serialization of actor outputs"															+ EOL +
+			"let outputMap = new Dictionary<string, Object>()"											+ EOL +
+			"outputMap.Add(\"z\", z)"																	+ EOL +
 			""																							+ EOL +
-			"// render actor input control variables as yaml" 											+ EOL +
-			"printfn \"enabledInputs: %s\" enabledInputs"												+ EOL +
-			"printfn \"disabledInputs: %s\" disabledInputs" 											+ EOL +
+			"outputMap.Add(\"enabledInputs\", enabledInputs)"											+ EOL +
+			"outputMap.Add(\"disabledInputs\", disabledInputs)"											+ EOL +
 			""																							+ EOL +
-			"// render actor output control variables as yaml" 											+ EOL +
-			"printfn \"enabledOutputs: %s\" enabledOutputs" 											+ EOL +
-			"printfn \"disabledOutputs: %s\" disabledOutputs" 											+ EOL +
-			"" 																							+ EOL,
+			"outputMap.Add(\"enabledOutputs\", enabledOutputs)"											+ EOL +
+			"outputMap.Add(\"disabledOutputs\", disabledOutputs)"										+ EOL +
+			""																							+ EOL +
+			"let outputJson = JsonConvert.SerializeObject(outputMap)"									+ EOL +
+			"Console.WriteLine(outputJson)"																+ EOL,
 			actor.getAugmentedStepScript());
 		
 		// run the workflow while capturing stdout and stderr 

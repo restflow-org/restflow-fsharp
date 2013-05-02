@@ -9,10 +9,15 @@ public class FSharpActor extends AugmentedScriptActor {
 	public ActorScriptBuilder getNewScriptBuilder() {
 		return new FSharpActor.ScriptBuilder();
 	}
-		
+	
 	@Override
 	public synchronized String getScriptRunCommand() {
 		return "fsi.exe --quiet";
+	}
+
+	@Override
+	public DataSerializationFormat getOutputSerializationFormat() {
+		return DataSerializationFormat.YAML;
 	}
 
 	public static class ScriptBuilder implements ActorScriptBuilder {
@@ -36,8 +41,7 @@ public class FSharpActor extends AugmentedScriptActor {
 			_script.append(		EOL		);
 			return this;
 		}
-
-		
+	
 		public ScriptBuilder appendComment(String text) {
 			_script.append(		"// "	)
 				   .append(		text	)
@@ -45,6 +49,21 @@ public class FSharpActor extends AugmentedScriptActor {
 			return this;
 		}
 		
+		public void appendScriptHeader(ActorScriptBuilder script, String scriptType) {
+			
+			appendComment(		"reference required assemblies"									);
+			_script.append(		"#r \""															)
+			       .append(		System.getProperty("user.home").replaceAll("\\\\", "/")			)
+			       .append(		"/.m2/dll/Newtonsoft/Json/Newtonsoft.Json.dll\""		+ EOL	);
+			appendBlankLine();
+			
+			appendComment(		"access namespaces"												);
+			_script.append(		"open System"											+ EOL	)
+				   .append(		"open System.IO"										+ EOL	)
+				   .append(		"open System.Collections.Generic"						+ EOL 	)
+				   .append(		"open Newtonsoft.Json" 									+ EOL 	);
+			appendBlankLine();
+		}
 		
 		private Object _convertToType(Object value, String type) {
 			
@@ -58,7 +77,7 @@ public class FSharpActor extends AugmentedScriptActor {
 			
 			return value;
 		}
-		
+
 		public ScriptBuilder appendLiteralAssignment(String name, Object value, String type, boolean mutable, boolean nullable) throws Exception {
 			
 			value = _convertToType(value, type);
@@ -110,14 +129,13 @@ public class FSharpActor extends AugmentedScriptActor {
 			
 			_script.append(		EOL				);
 		}
-		
+
 		private String _otos(Object value) {
 			if (value instanceof String)
 				return "\"\"\"" + value.toString() +  "\"\"\"";
 			else
 				return value.toString();
-		}
-		
+		}		
 
 		private void _assignTypedLiteral(String name, Object value, String fsharpType, boolean mutable, boolean nullable) throws Exception {
 			
@@ -157,13 +175,13 @@ public class FSharpActor extends AugmentedScriptActor {
 			
 			_script	.append(	EOL				);
 		}
-		
+
 		public ScriptBuilder appendChangeDirectory(String path) {
-			_script.append(		"System.IO.Directory.SetCurrentDirectory "	)
-				   .append(		"\"\"\""			)
-				   .append( 	path			)
-				   .append(		"\"\"\""			)
-				   .append(		EOL				);
+			_script.append(		"Directory.SetCurrentDirectory "	)
+				   .append(		"\"\"\""							)
+				   .append( 	path								)
+				   .append(		"\"\"\""							)
+				   .append(		EOL									);
 			return this;
 		}
 
@@ -175,24 +193,48 @@ public class FSharpActor extends AugmentedScriptActor {
 			return this;
 		}
 
-		public ScriptBuilder appendVariableYamlPrintStatement(String name, String type) {
-			_script.append(		"printfn \""	)
-				   .append(		name			)
-				   .append(		": %A\" "		)
-				   .append(		name			)
-				   .append(		EOL				);	
-			return this;
-		}
-		
-		public ActorScriptBuilder appendNonNullStringYamlPrintStatement(String name) {
-			_script.append(		"printfn \""	)
-				   .append(		name			)
-				   .append( 	": %s\" "		)
-				   .append(		name			)
-				   .append(		EOL				);
+		public ActorScriptBuilder appendSerializationBeginStatement() {
+			_script.append(		"let outputMap = new Dictionary<string, Object>()"  		+ EOL	);
 			return this;
 		}
 
+		public ActorScriptBuilder appendSerializationEndStatement() {
+			_script.append(		"let outputJson = JsonConvert.SerializeObject(outputMap)"	+ EOL	)	
+			       .append(		"Console.WriteLine(outputJson)"								+ EOL	);
+			return this;
+		}
+
+		public ScriptBuilder appendVariableSerializationStatement(String name, String type) {
+			_script.append(		"outputMap.Add(\""	)
+				   .append(		name				)
+				   .append(		"\", "				)
+				   .append(		name				)
+				   .append(		")"					)
+				   .append(		EOL					);	
+			return this;
+		}
+		
+		public ActorScriptBuilder appendNonNullStringVariableSerializationPrintStatement(String name) {
+			return appendVariableSerializationStatement(name, null);
+		}
+
+//		public ScriptBuilder appendVariableSerializationStatement(String name, String type) {
+//			_script.append(		"printfn \""	)
+//				   .append(		name			)
+//				   .append(		": %A\" "		)
+//				   .append(		name			)
+//				   .append(		EOL				);	
+//			return this;
+//		}
+//		
+//		public ActorScriptBuilder appendNonNullStringVariableSerializationPrintStatement(String name) {
+//			_script.append(		"printfn \""	)
+//				   .append(		name			)
+//				   .append( 	": %s\" "		)
+//				   .append(		name			)
+//				   .append(		EOL				);
+//			return this;
+//		}
 		public ScriptBuilder appendInputControlFunctions() {
 
 			appendComment("initialize input control variables");
