@@ -29,33 +29,37 @@ public class TestFSharpActor extends RestFlowTestCase {
 		actor.elaborate();
 		actor.configure();
 		actor.initialize();
-				
+	
 		assertEquals(
-			"// AUGMENTED STEP SCRIPT FOR ACTOR Hello" 													+ EOL +
-			"" 																							+ EOL +
-			"// reference required assemblies" 															+ EOL +
-			"#r \"C:/Users/tmcphillips/.m2/dll/Newtonsoft/Json/Newtonsoft.Json.dll\"" 					+ EOL +
-			"" 																							+ EOL +
-			"// access namespaces" 																		+ EOL +
-			"open System" 																				+ EOL +
-			"open System.IO" 																			+ EOL +
-			"open System.Collections.Generic" 															+ EOL +
-			"open Newtonsoft.Json" 																		+ EOL +
-			""																							+ EOL +
-			"// BEGINNING OF ORIGINAL SCRIPT" 															+ EOL +
-			"" 																							+ EOL +
-			"printfn \"Hello world!!!\";;"																+ EOL +
-			"" 																							+ EOL +
-			"// END OF ORIGINAL SCRIPT" 																+ EOL +
-			"" 																							+ EOL +
-			"// signal end of output from original script" 												+ EOL +
-			"printfn \"__END_OF_SCRIPT_OUTPUT__\"" 														+ EOL +
-			"" 																							+ EOL +
-			"// Serialization of actor outputs" 														+ EOL +
-			"let outputMap = new Dictionary<string, Object>()" 											+ EOL +
-			"let outputJson = JsonConvert.SerializeObject(outputMap)" 									+ EOL +
-			"Console.WriteLine(outputJson)" 															+ EOL
-			, actor.getAugmentedStepScript());
+			"// AUGMENTED STEP SCRIPT FOR ACTOR Hello" 														+ EOL +
+			"" 																								+ EOL +
+			"// reference required assemblies" 																+ EOL +
+			"#r \"" + System.getProperty("user.home") + "/.m2/dll/Newtonsoft/Json/Newtonsoft.Json.dll\"" 	+ EOL +
+			"" 																								+ EOL +
+			"// access namespaces" 																			+ EOL +
+			"open System" 																					+ EOL +
+			"open System.IO" 																				+ EOL +
+			"open System.Collections.Generic" 																+ EOL +
+			"open Newtonsoft.Json" 																			+ EOL +
+			""																								+ EOL +
+			"// BEGINNING OF ORIGINAL SCRIPT" 																+ EOL +
+			"" 																								+ EOL +
+			"printfn \"Hello world!!!\";;"																	+ EOL +
+			"" 																								+ EOL +
+			"// END OF ORIGINAL SCRIPT" 																	+ EOL +
+			"" 																								+ EOL +
+			"// signal end of output from original script" 													+ EOL +
+			"printfn \"__END_OF_SCRIPT_OUTPUT__\"" 															+ EOL +
+			"" 																								+ EOL +
+			"// Serialization of actor outputs" 															+ EOL +
+			"let outputMap = new Dictionary<string, Object>()" 												+ EOL +
+			"let outputJson = JsonConvert.SerializeObject(outputMap)" 										+ EOL +
+			"Console.WriteLine(outputJson)" 																+ EOL +
+			"" 																								+ EOL +
+			"// exit the fsharp interpreter" 																+ EOL +
+			"#quit"																							+ EOL
+			, actor.getAugmentedStepScript()
+		);
 		
 		// run the workflow while capturing stdout and stderr 
 		StdoutRecorder recorder = new StdoutRecorder(new StdoutRecorder.WrappedCode() {
@@ -86,44 +90,47 @@ public class TestFSharpActor extends RestFlowTestCase {
 		actor.setInputValue("greeting", "Goodbye");
 		
 		assertEquals(
-			"// AUGMENTED STEP SCRIPT FOR ACTOR Hello" 													+ EOL +
-			"" 																							+ EOL +
-			"// reference required assemblies" 															+ EOL +
-			"#r \"C:/Users/tmcphillips/.m2/dll/Newtonsoft/Json/Newtonsoft.Json.dll\"" 					+ EOL +
-			"" 																							+ EOL +
-			"// access namespaces" 																		+ EOL +
-			"open System" 																				+ EOL +
-			"open System.IO" 																			+ EOL +
-			"open System.Collections.Generic" 															+ EOL +
-			"open Newtonsoft.Json" 																		+ EOL +
-			""																							+ EOL +
-			"// initialize input control variables"		 												+ EOL +
-			"let mutable enabledInputs   = \"\"" 														+ EOL +
-			"let mutable disabledInputs  = \"\"" 														+ EOL +
-			"" 																							+ EOL +
-			"// define functions for enabling and disabling actor inputs" 								+ EOL +
-			"let enableInput input  =  enabledInputs <- enabledInputs + \" \" + input" 					+ EOL +
-			"let disableInput input =  disabledInputs <- disabledInputs + \" \" + input" 				+ EOL +
-			"" 																							+ EOL +
-			"// initialize actor input variables"														+ EOL +
-			"let greeting = \"\"\"Goodbye\"\"\""														+ EOL +
-			""																							+ EOL +
-			"// BEGINNING OF ORIGINAL SCRIPT"															+ EOL +
-			""																							+ EOL +
-			"printfn \"%s world!\" greeting"															+ EOL +
-			"" 																							+ EOL +
-			"// END OF ORIGINAL SCRIPT" 																+ EOL +
-			"" 																							+ EOL +
-			"// signal end of output from original script"												+ EOL +
-			"printfn \"__END_OF_SCRIPT_OUTPUT__\""														+ EOL +
-			""																							+ EOL +
-			"// Serialization of actor outputs"															+ EOL +
-			"let outputMap = new Dictionary<string, Object>()"											+ EOL +
-			"outputMap.Add(\"enabledInputs\", enabledInputs)"											+ EOL +
-			"outputMap.Add(\"disabledInputs\", disabledInputs)"											+ EOL +
-			""																							+ EOL +
-			"let outputJson = JsonConvert.SerializeObject(outputMap)"									+ EOL +
-			"Console.WriteLine(outputJson)"																+ EOL
+			"// AUGMENTED STEP SCRIPT FOR ACTOR Hello" 														+ EOL +
+			"" 																								+ EOL +
+			"// reference required assemblies" 																+ EOL +
+			"#r \"" + System.getProperty("user.home") + "/.m2/dll/Newtonsoft/Json/Newtonsoft.Json.dll\"" 	+ EOL +
+			"" 																								+ EOL +
+			"// access namespaces" 																			+ EOL +
+			"open System" 																					+ EOL +
+			"open System.IO" 																				+ EOL +
+			"open System.Collections.Generic" 																+ EOL +
+			"open Newtonsoft.Json" 																			+ EOL +
+			""																								+ EOL +
+			"// initialize input control variables"		 													+ EOL +
+			"let mutable enabledInputs   = \"\"" 															+ EOL +
+			"let mutable disabledInputs  = \"\"" 															+ EOL +
+			"" 																								+ EOL +
+			"// define functions for enabling and disabling actor inputs" 									+ EOL +
+			"let enableInput input  =  enabledInputs <- enabledInputs + \" \" + input" 						+ EOL +
+			"let disableInput input =  disabledInputs <- disabledInputs + \" \" + input" 					+ EOL +
+			"" 																								+ EOL +
+			"// initialize actor input variables"															+ EOL +
+			"let greeting = \"\"\"Goodbye\"\"\""															+ EOL +
+			""																								+ EOL +
+			"// BEGINNING OF ORIGINAL SCRIPT"																+ EOL +
+			""																								+ EOL +
+			"printfn \"%s world!\" greeting"																+ EOL +
+			"" 																								+ EOL +
+			"// END OF ORIGINAL SCRIPT" 																	+ EOL +
+			"" 																								+ EOL +
+			"// signal end of output from original script"													+ EOL +
+			"printfn \"__END_OF_SCRIPT_OUTPUT__\""															+ EOL +
+			""																								+ EOL +
+			"// Serialization of actor outputs"																+ EOL +
+			"let outputMap = new Dictionary<string, Object>()"												+ EOL +
+			"outputMap.Add(\"enabledInputs\", enabledInputs)"												+ EOL +
+			"outputMap.Add(\"disabledInputs\", disabledInputs)"												+ EOL +
+			""																								+ EOL +
+			"let outputJson = JsonConvert.SerializeObject(outputMap)"										+ EOL +
+			"Console.WriteLine(outputJson)"																	+ EOL +
+			"" 																								+ EOL +
+			"// exit the fsharp interpreter" 																+ EOL +
+			"#quit"																							+ EOL
 			, actor.getAugmentedStepScript());
 		
 		// run the workflow while capturing stdout and stderr 
@@ -152,46 +159,47 @@ public class TestFSharpActor extends RestFlowTestCase {
 		actor.configure();
 		actor.initialize();
 		
-		String userHome = System.getProperty("user.home").replaceAll("\\\\", "/");
-		
 		assertEquals(
-			"// AUGMENTED STEP SCRIPT FOR ACTOR Hello" 													+ EOL +
-			"" 																							+ EOL +
-			"// reference required assemblies" 															+ EOL +
-			"#r \"C:/Users/tmcphillips/.m2/dll/Newtonsoft/Json/Newtonsoft.Json.dll\"" 					+ EOL +
-			"" 																							+ EOL +
-			"// access namespaces" 																		+ EOL +
-			"open System" 																				+ EOL +
-			"open System.IO" 																			+ EOL +
-			"open System.Collections.Generic" 															+ EOL +
-			"open Newtonsoft.Json" 																		+ EOL +
-			""																							+ EOL +			
-			"// initialize output control variables"		 											+ EOL +
-			"let mutable enabledOutputs   = \"\"" 														+ EOL +
-			"let mutable disabledOutputs  = \"\"" 														+ EOL +
-			"" 																							+ EOL +
-			"// define functions for enabling and disabling actor outputs" 								+ EOL +
-			"let enableOutput output  =  enabledOutputs <- enabledOutputs + \" \" + output" 			+ EOL +
-			"let disableOutput output =  disabledOutputs <- disabledOutputs + \" \" + output" 			+ EOL +
-			"" 																							+ EOL +
-			"// BEGINNING OF ORIGINAL SCRIPT" 															+ EOL +
-			"" 																							+ EOL +
-			"let greeting = \"Nice to meet you.\""														+ EOL +
-			"" 																							+ EOL +
-			"// END OF ORIGINAL SCRIPT" 																+ EOL +
-			"" 																							+ EOL +
-			"// signal end of output from original script" 												+ EOL +
-			"printfn \"__END_OF_SCRIPT_OUTPUT__\"" 														+ EOL +
-			"" 																							+ EOL +
-			"// Serialization of actor outputs" 														+ EOL +
-			"let outputMap = new Dictionary<string, Object>()" 											+ EOL +
-			"outputMap.Add(\"greeting\", greeting)"														+ EOL +
-			"" 																							+ EOL +
-			"outputMap.Add(\"enabledOutputs\", enabledOutputs)" 										+ EOL +
-			"outputMap.Add(\"disabledOutputs\", disabledOutputs)" 										+ EOL +
-			"" 																							+ EOL +
-			"let outputJson = JsonConvert.SerializeObject(outputMap)"									+ EOL +
-			"Console.WriteLine(outputJson)" 															+ EOL 
+			"// AUGMENTED STEP SCRIPT FOR ACTOR Hello" 														+ EOL +
+			"" 																								+ EOL +
+			"// reference required assemblies" 																+ EOL +
+			"#r \"" + System.getProperty("user.home") + "/.m2/dll/Newtonsoft/Json/Newtonsoft.Json.dll\"" 	+ EOL +
+			"" 																								+ EOL +
+			"// access namespaces" 																			+ EOL +
+			"open System" 																					+ EOL +
+			"open System.IO" 																				+ EOL +
+			"open System.Collections.Generic" 																+ EOL +
+			"open Newtonsoft.Json" 																			+ EOL +
+			""																								+ EOL +			
+			"// initialize output control variables"		 												+ EOL +
+			"let mutable enabledOutputs   = \"\"" 															+ EOL +
+			"let mutable disabledOutputs  = \"\"" 															+ EOL +
+			"" 																								+ EOL +
+			"// define functions for enabling and disabling actor outputs" 									+ EOL +
+			"let enableOutput output  =  enabledOutputs <- enabledOutputs + \" \" + output" 				+ EOL +
+			"let disableOutput output =  disabledOutputs <- disabledOutputs + \" \" + output" 				+ EOL +
+			"" 																								+ EOL +
+			"// BEGINNING OF ORIGINAL SCRIPT" 																+ EOL +
+			"" 																								+ EOL +
+			"let greeting = \"Nice to meet you.\""															+ EOL +
+			"" 																								+ EOL +
+			"// END OF ORIGINAL SCRIPT" 																	+ EOL +
+			"" 																								+ EOL +
+			"// signal end of output from original script" 													+ EOL +
+			"printfn \"__END_OF_SCRIPT_OUTPUT__\"" 															+ EOL +
+			"" 																								+ EOL +
+			"// Serialization of actor outputs" 															+ EOL +
+			"let outputMap = new Dictionary<string, Object>()" 												+ EOL +
+			"outputMap.Add(\"greeting\", greeting)"															+ EOL +
+			"" 																								+ EOL +
+			"outputMap.Add(\"enabledOutputs\", enabledOutputs)" 											+ EOL +
+			"outputMap.Add(\"disabledOutputs\", disabledOutputs)" 											+ EOL +
+			"" 																								+ EOL +
+			"let outputJson = JsonConvert.SerializeObject(outputMap)"										+ EOL +
+			"Console.WriteLine(outputJson)" 																+ EOL +
+			"" 																								+ EOL +
+			"// exit the fsharp interpreter" 																+ EOL +
+			"#quit"																							+ EOL 
 			, actor.getAugmentedStepScript());
 		
 		// run the workflow while capturing stdout and stderr 
@@ -218,34 +226,37 @@ public class TestFSharpActor extends RestFlowTestCase {
 		actor.initialize();
 		
 		assertEquals(
-			"// AUGMENTED STEP SCRIPT FOR ACTOR Hello" 													+ EOL +
-			"" 																							+ EOL +
-			"// reference required assemblies" 															+ EOL +
-			"#r \"C:/Users/tmcphillips/.m2/dll/Newtonsoft/Json/Newtonsoft.Json.dll\"" 					+ EOL +
-			"" 																							+ EOL +
-			"// access namespaces" 																		+ EOL +
-			"open System" 																				+ EOL +
-			"open System.IO" 																			+ EOL +
-			"open System.Collections.Generic" 															+ EOL +
-			"open Newtonsoft.Json" 																		+ EOL +
-			""																							+ EOL +
-			"// initialize actor state variables" 														+ EOL +
-			""							 																+ EOL +
-			"// BEGINNING OF ORIGINAL SCRIPT" 															+ EOL +
-			""							 																+ EOL +
-			"let greeting = \"Nice to meet you.\""														+ EOL +
-			""							 																+ EOL +
-			"// END OF ORIGINAL SCRIPT" 																+ EOL +
-			""							 																+ EOL +
-			"// signal end of output from original script" 												+ EOL +
-			"printfn \"__END_OF_SCRIPT_OUTPUT__\"" 														+ EOL +
-			""							 																+ EOL +
-			"// Serialization of actor outputs" 														+ EOL +
-			"let outputMap = new Dictionary<string, Object>()" 											+ EOL +
-			"outputMap.Add(\"greeting\", greeting)" 													+ EOL +
-			"" 																							+ EOL +
-			"let outputJson = JsonConvert.SerializeObject(outputMap)" 									+ EOL +
-			"Console.WriteLine(outputJson)" 															+ EOL
+			"// AUGMENTED STEP SCRIPT FOR ACTOR Hello" 														+ EOL +
+			"" 																								+ EOL +
+			"// reference required assemblies" 																+ EOL +
+			"#r \"" + System.getProperty("user.home") + "/.m2/dll/Newtonsoft/Json/Newtonsoft.Json.dll\"" 	+ EOL +
+			"" 																								+ EOL +
+			"// access namespaces" 																			+ EOL +
+			"open System" 																					+ EOL +
+			"open System.IO" 																				+ EOL +
+			"open System.Collections.Generic" 																+ EOL +
+			"open Newtonsoft.Json" 																			+ EOL +
+			""																								+ EOL +
+			"// initialize actor state variables" 															+ EOL +
+			""							 																	+ EOL +
+			"// BEGINNING OF ORIGINAL SCRIPT" 																+ EOL +
+			""							 																	+ EOL +
+			"let greeting = \"Nice to meet you.\""															+ EOL +
+			""							 																	+ EOL +
+			"// END OF ORIGINAL SCRIPT" 																	+ EOL +
+			""							 																	+ EOL +
+			"// signal end of output from original script" 													+ EOL +
+			"printfn \"__END_OF_SCRIPT_OUTPUT__\"" 															+ EOL +
+			""							 																	+ EOL +
+			"// Serialization of actor outputs" 															+ EOL +
+			"let outputMap = new Dictionary<string, Object>()" 												+ EOL +
+			"outputMap.Add(\"greeting\", greeting)" 														+ EOL +
+			"" 																								+ EOL +
+			"let outputJson = JsonConvert.SerializeObject(outputMap)" 										+ EOL +
+			"Console.WriteLine(outputJson)" 																+ EOL +
+			"" 																								+ EOL +
+			"// exit the fsharp interpreter" 																+ EOL +
+			"#quit"																							+ EOL
 			, actor.getAugmentedStepScript());
 		
 		// run the workflow while capturing stdout and stderr 
@@ -280,59 +291,62 @@ public class TestFSharpActor extends RestFlowTestCase {
 		actor.setInputValue("y", 12);
 		
 		assertEquals(
-			"// AUGMENTED STEP SCRIPT FOR ACTOR Multiplier"												+ EOL +
-			""																							+ EOL +
-			"// reference required assemblies" 															+ EOL +
-			"#r \"C:/Users/tmcphillips/.m2/dll/Newtonsoft/Json/Newtonsoft.Json.dll\"" 					+ EOL +
-			"" 																							+ EOL +
-			"// access namespaces" 																		+ EOL +
-			"open System" 																				+ EOL +
-			"open System.IO" 																			+ EOL +
-			"open System.Collections.Generic" 															+ EOL +
-			"open Newtonsoft.Json" 																		+ EOL +
-			""																							+ EOL +
-			"// initialize input control variables"		 												+ EOL +
-			"let mutable enabledInputs   = \"\"" 														+ EOL +
-			"let mutable disabledInputs  = \"\"" 														+ EOL +
-			"" 																							+ EOL +
-			"// define functions for enabling and disabling actor inputs" 								+ EOL +
-			"let enableInput input  =  enabledInputs <- enabledInputs + \" \" + input" 							+ EOL +
-			"let disableInput input =  disabledInputs <- disabledInputs + \" \" + input" 						+ EOL +
-			""																							+ EOL +
-			"// initialize output control variables"		 											+ EOL +
-			"let mutable enabledOutputs   = \"\"" 														+ EOL +
-			"let mutable disabledOutputs  = \"\"" 														+ EOL +
-			"" 																							+ EOL +
-			"// define functions for enabling and disabling actor outputs" 								+ EOL +
-			"let enableOutput output  =  enabledOutputs <- enabledOutputs + \" \" + output" 					+ EOL +
-			"let disableOutput output =  disabledOutputs <- disabledOutputs + \" \" + output" 					+ EOL +
-			""																							+ EOL +
-			"// initialize actor input variables"														+ EOL +
-			"let (y:int) = 12"																			+ EOL +
-			"let (x:int) = 3"																			+ EOL +
-			""																							+ EOL +
-			"// BEGINNING OF ORIGINAL SCRIPT"															+ EOL +
-			""																							+ EOL +
-			"let z = x * y"																				+ EOL +
-			""																							+ EOL +
-			"// END OF ORIGINAL SCRIPT"																	+ EOL +
-			""																							+ EOL +
-			"// signal end of output from original script"												+ EOL +
-			"printfn \"__END_OF_SCRIPT_OUTPUT__\""														+ EOL +
-			""																							+ EOL +
-			"// Serialization of actor outputs"															+ EOL +
-			"let outputMap = new Dictionary<string, Object>()"											+ EOL +
-			"outputMap.Add(\"z\", z)"																	+ EOL +
-			""																							+ EOL +
-			"outputMap.Add(\"enabledInputs\", enabledInputs)"											+ EOL +
-			"outputMap.Add(\"disabledInputs\", disabledInputs)"											+ EOL +
-			""																							+ EOL +
-			"outputMap.Add(\"enabledOutputs\", enabledOutputs)"											+ EOL +
-			"outputMap.Add(\"disabledOutputs\", disabledOutputs)"										+ EOL +
-			""																							+ EOL +
-			"let outputJson = JsonConvert.SerializeObject(outputMap)"									+ EOL +
-			"Console.WriteLine(outputJson)"																+ EOL,
-			actor.getAugmentedStepScript());
+			"// AUGMENTED STEP SCRIPT FOR ACTOR Multiplier"													+ EOL +
+			""																								+ EOL +
+			"// reference required assemblies" 																+ EOL +
+			"#r \"" + System.getProperty("user.home") + "/.m2/dll/Newtonsoft/Json/Newtonsoft.Json.dll\"" 	+ EOL +
+			"" 																								+ EOL +
+			"// access namespaces" 																			+ EOL +
+			"open System" 																					+ EOL +
+			"open System.IO" 																				+ EOL +
+			"open System.Collections.Generic" 																+ EOL +
+			"open Newtonsoft.Json" 																			+ EOL +
+			""																								+ EOL +
+			"// initialize input control variables"		 													+ EOL +
+			"let mutable enabledInputs   = \"\"" 															+ EOL +
+			"let mutable disabledInputs  = \"\"" 															+ EOL +
+			"" 																								+ EOL +
+			"// define functions for enabling and disabling actor inputs" 									+ EOL +
+			"let enableInput input  =  enabledInputs <- enabledInputs + \" \" + input" 						+ EOL +
+			"let disableInput input =  disabledInputs <- disabledInputs + \" \" + input" 					+ EOL +
+			""																								+ EOL +
+			"// initialize output control variables"		 												+ EOL +
+			"let mutable enabledOutputs   = \"\"" 															+ EOL +
+			"let mutable disabledOutputs  = \"\"" 															+ EOL +
+			"" 																								+ EOL +
+			"// define functions for enabling and disabling actor outputs" 									+ EOL +
+			"let enableOutput output  =  enabledOutputs <- enabledOutputs + \" \" + output" 				+ EOL +
+			"let disableOutput output =  disabledOutputs <- disabledOutputs + \" \" + output" 				+ EOL +
+			""																								+ EOL +
+			"// initialize actor input variables"															+ EOL +
+			"let (y:int) = 12"																				+ EOL +
+			"let (x:int) = 3"																				+ EOL +
+			""																								+ EOL +
+			"// BEGINNING OF ORIGINAL SCRIPT"																+ EOL +
+			""																								+ EOL +
+			"let z = x * y"																					+ EOL +
+			""																								+ EOL +
+			"// END OF ORIGINAL SCRIPT"																		+ EOL +
+			""																								+ EOL +
+			"// signal end of output from original script"													+ EOL +
+			"printfn \"__END_OF_SCRIPT_OUTPUT__\""															+ EOL +
+			""																								+ EOL +
+			"// Serialization of actor outputs"																+ EOL +
+			"let outputMap = new Dictionary<string, Object>()"												+ EOL +
+			"outputMap.Add(\"z\", z)"																		+ EOL +
+			""																								+ EOL +
+			"outputMap.Add(\"enabledInputs\", enabledInputs)"												+ EOL +
+			"outputMap.Add(\"disabledInputs\", disabledInputs)"												+ EOL +
+			""																								+ EOL +
+			"outputMap.Add(\"enabledOutputs\", enabledOutputs)"												+ EOL +
+			"outputMap.Add(\"disabledOutputs\", disabledOutputs)"											+ EOL +
+			""																								+ EOL +
+			"let outputJson = JsonConvert.SerializeObject(outputMap)"										+ EOL +
+			"Console.WriteLine(outputJson)"																	+ EOL +
+			"" 																								+ EOL +
+			"// exit the fsharp interpreter" 																+ EOL +
+			"#quit"																							+ EOL
+			, actor.getAugmentedStepScript());
 		
 		// run the workflow while capturing stdout and stderr 
 		StdoutRecorder recorder = new StdoutRecorder(new StdoutRecorder.WrappedCode() {

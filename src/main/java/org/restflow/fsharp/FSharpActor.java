@@ -20,6 +20,16 @@ public class FSharpActor extends AugmentedScriptActor {
 		return DataSerializationFormat.YAML;
 	}
 
+	@Override
+	protected String adjustStderr(String completeStderr) {
+		String trimmedStderr = completeStderr.trim();
+		if (trimmedStderr.trim().endsWith("- Exit...")) {
+			return trimmedStderr.substring(0, trimmedStderr.length() - 9).trim();
+		} else {
+			return completeStderr;
+		}
+	}
+	
 	public static class ScriptBuilder implements ActorScriptBuilder {
 
 		private StringBuilder _script = new StringBuilder();
@@ -194,13 +204,15 @@ public class FSharpActor extends AugmentedScriptActor {
 		}
 
 		public ActorScriptBuilder appendSerializationBeginStatement() {
-			_script.append(		"let outputMap = new Dictionary<string, Object>()"  		+ EOL	);
+			appendCode(	"let outputMap = new Dictionary<string, Object>()" );
 			return this;
 		}
 
 		public ActorScriptBuilder appendSerializationEndStatement() {
-			_script.append(		"let outputJson = JsonConvert.SerializeObject(outputMap)"	+ EOL	)	
-			       .append(		"Console.WriteLine(outputJson)"								+ EOL	);
+			
+			appendCode( "let outputJson = JsonConvert.SerializeObject(outputMap)"	);	
+			appendCode( "Console.WriteLine(outputJson)"								);
+
 			return this;
 		}
 
@@ -218,23 +230,6 @@ public class FSharpActor extends AugmentedScriptActor {
 			return appendVariableSerializationStatement(name, null);
 		}
 
-//		public ScriptBuilder appendVariableSerializationStatement(String name, String type) {
-//			_script.append(		"printfn \""	)
-//				   .append(		name			)
-//				   .append(		": %A\" "		)
-//				   .append(		name			)
-//				   .append(		EOL				);	
-//			return this;
-//		}
-//		
-//		public ActorScriptBuilder appendNonNullStringVariableSerializationPrintStatement(String name) {
-//			_script.append(		"printfn \""	)
-//				   .append(		name			)
-//				   .append( 	": %s\" "		)
-//				   .append(		name			)
-//				   .append(		EOL				);
-//			return this;
-//		}
 		public ScriptBuilder appendInputControlFunctions() {
 
 			appendComment("initialize input control variables");
@@ -263,8 +258,18 @@ public class FSharpActor extends AugmentedScriptActor {
 			return this;
 		}
 
+		@Override
+		public ScriptBuilder appendScriptExitCommend() {
+			
+			appendComment("exit the fsharp interpreter");
+			appendCode("#quit");
+			
+			return this;
+		}
+		
 		
 		public String toString() {
+
 			return _script.toString();
 		}
 	}
