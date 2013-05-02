@@ -48,7 +48,45 @@
       <version>1.0</version>
     </dependency>
 
+	<dependency>
+		<groupId>com.google.code.gson</groupId>
+		<artifactId>gson</artifactId>
+		<version>2.2.2</version>
+	</dependency>
+	
+	<dependency>
+	  <groupId>Newtonsoft</groupId>
+	  <artifactId>Json</artifactId>
+	  <version>4.5.11</version>
+	</dependency>
+
   </dependencies>
+
+<build>
+	<plugins>
+		<plugin>
+		    <groupId>org.apache.maven.plugins</groupId>
+		    <artifactId>maven-dependency-plugin</artifactId>
+		    <version>2.2</version>
+		    <executions>
+		      <execution>
+		        <id>Newtonsoft.Json</id>
+		        <phase>compile</phase>
+		        <goals>
+		          <goal>unpack-dependencies</goal>
+		        </goals>
+		        <configuration>
+		          <includeGroupIds>Newtonsoft</includeGroupIds>
+		          <includeArtifactIds>Json</includeArtifactIds>
+		          <outputDirectory>
+		             ${user.home}/.m2/dll
+		          </outputDirectory>
+		        </configuration>
+		      </execution>
+		    </executions>
+		</plugin>
+	</plugins>
+</build>
 
   <reporting>
     <plugins>
