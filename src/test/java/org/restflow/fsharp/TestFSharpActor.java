@@ -34,7 +34,7 @@ public class TestFSharpActor extends RestFlowTestCase {
 			"// AUGMENTED STEP SCRIPT FOR ACTOR Hello" 														+ EOL +
 			"" 																								+ EOL +
 			"// reference required assemblies" 																+ EOL +
-			"#r \"" + System.getProperty("user.home") + "/.m2/dll/Newtonsoft/Json/Newtonsoft.Json.dll\"" 	+ EOL +
+			FSharpActor.JSON_NET_DLL_REFERENCE															 	+ EOL +
 			"" 																								+ EOL +
 			"// access namespaces" 																			+ EOL +
 			"open System" 																					+ EOL +
@@ -93,7 +93,7 @@ public class TestFSharpActor extends RestFlowTestCase {
 			"// AUGMENTED STEP SCRIPT FOR ACTOR Hello" 														+ EOL +
 			"" 																								+ EOL +
 			"// reference required assemblies" 																+ EOL +
-			"#r \"" + System.getProperty("user.home") + "/.m2/dll/Newtonsoft/Json/Newtonsoft.Json.dll\"" 	+ EOL +
+			FSharpActor.JSON_NET_DLL_REFERENCE															 	+ EOL +
 			"" 																								+ EOL +
 			"// access namespaces" 																			+ EOL +
 			"open System" 																					+ EOL +
@@ -163,7 +163,7 @@ public class TestFSharpActor extends RestFlowTestCase {
 			"// AUGMENTED STEP SCRIPT FOR ACTOR Hello" 														+ EOL +
 			"" 																								+ EOL +
 			"// reference required assemblies" 																+ EOL +
-			"#r \"" + System.getProperty("user.home") + "/.m2/dll/Newtonsoft/Json/Newtonsoft.Json.dll\"" 	+ EOL +
+			FSharpActor.JSON_NET_DLL_REFERENCE															 	+ EOL +
 			"" 																								+ EOL +
 			"// access namespaces" 																			+ EOL +
 			"open System" 																					+ EOL +
@@ -229,7 +229,7 @@ public class TestFSharpActor extends RestFlowTestCase {
 			"// AUGMENTED STEP SCRIPT FOR ACTOR Hello" 														+ EOL +
 			"" 																								+ EOL +
 			"// reference required assemblies" 																+ EOL +
-			"#r \"" + System.getProperty("user.home") + "/.m2/dll/Newtonsoft/Json/Newtonsoft.Json.dll\"" 	+ EOL +
+			FSharpActor.JSON_NET_DLL_REFERENCE															 	+ EOL +
 			"" 																								+ EOL +
 			"// access namespaces" 																			+ EOL +
 			"open System" 																					+ EOL +
@@ -294,7 +294,7 @@ public class TestFSharpActor extends RestFlowTestCase {
 			"// AUGMENTED STEP SCRIPT FOR ACTOR Multiplier"													+ EOL +
 			""																								+ EOL +
 			"// reference required assemblies" 																+ EOL +
-			"#r \"" + System.getProperty("user.home") + "/.m2/dll/Newtonsoft/Json/Newtonsoft.Json.dll\"" 	+ EOL +
+			FSharpActor.JSON_NET_DLL_REFERENCE															 	+ EOL +
 			"" 																								+ EOL +
 			"// access namespaces" 																			+ EOL +
 			"open System" 																					+ EOL +

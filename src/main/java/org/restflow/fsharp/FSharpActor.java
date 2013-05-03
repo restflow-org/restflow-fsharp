@@ -4,7 +4,15 @@ import org.restflow.actors.ActorScriptBuilder;
 import org.restflow.actors.AugmentedScriptActor;
 
 public class FSharpActor extends AugmentedScriptActor {
+	
+	private final static String EOL = System.getProperty("line.separator");
 
+	public static final String MAVEN_CACHE_DLL_DIR = 
+			System.getProperty("user.home").replaceAll("\\\\", "/") + "/.m2/dll";
+
+	public static final String JSON_NET_DLL_REFERENCE =
+			"#r \"" + MAVEN_CACHE_DLL_DIR + "/Newtonsoft/Json/Newtonsoft.Json.dll\"";
+	
 	@Override
 	public ActorScriptBuilder getNewScriptBuilder() {
 		return new FSharpActor.ScriptBuilder();
@@ -33,7 +41,6 @@ public class FSharpActor extends AugmentedScriptActor {
 	public static class ScriptBuilder implements ActorScriptBuilder {
 
 		private StringBuilder _script = new StringBuilder();
-		private final static String EOL = System.getProperty("line.separator");
 
 		public ActorScriptBuilder appendCode(String code) {
 			_script.append(		code	)
@@ -62,9 +69,7 @@ public class FSharpActor extends AugmentedScriptActor {
 		public void appendScriptHeader(ActorScriptBuilder script, String scriptType) {
 			
 			appendComment(		"reference required assemblies"									);
-			_script.append(		"#r \""															)
-			       .append(		System.getProperty("user.home").replaceAll("\\\\", "/")			)
-			       .append(		"/.m2/dll/Newtonsoft/Json/Newtonsoft.Json.dll\""		+ EOL	);
+			appendCode(			JSON_NET_DLL_REFERENCE											);
 			appendBlankLine();
 			
 			appendComment(		"access namespaces"												);
