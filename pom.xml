@@ -14,7 +14,14 @@
         <url>http://smb.slac.stanford.edu/maven/release</url>
         </repository>
     </repositories>
-    
+  
+  <distributionManagement>
+    <repository>
+      <id>absflow maven repository</id>
+      <url>scpexe://absflow.com:21098/home/absfhhwv/public_html/mavenrepo</url>
+    </repository>
+  </distributionManagement>
+  
   <dependencies>
   
   	<dependency>
@@ -63,6 +70,15 @@
   </dependencies>
 
 <build>
+
+    <extensions>
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+         <artifactId>wagon-ssh-external</artifactId>
+         <version>2.4</version>
+      </extension>
+    </extensions>
+
 	<plugins>
 	
     		<!-- Set Java compiler source and target versions -->
