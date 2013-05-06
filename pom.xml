@@ -1,136 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+  
+	<modelVersion>4.0.0</modelVersion>
+ 	<groupId>org.restflow</groupId>
+	<artifactId>restflow-fsharp</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 
-  <groupId>org.restflow</groupId>
-  <artifactId>restflow-fsharp</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>jar</packaging>
 
     <repositories>
+
+    	<!-- maven repository for resolving org.restflow dependencies -->
         <repository>
-        <id>org.restflow</id>
-        <name>SSRL repository</name>
-        <url>http://smb.slac.stanford.edu/maven/release</url>
+	        <id>org.restflow</id>
+	        <name>restflow.org maven repository</name>
+	        <url>http://restflow.org/mavenrepo</url>
         </repository>
+
+    	<!-- maven repository for resolving org.absflow dependencies -->
+        <repository>
+	        <id>org.absflow</id>
+	        <name>absflow.org maven repository</name>
+	        <url>http://absflow.org/mavenrepo</url>
+        </repository>
+
     </repositories>
   
-  <distributionManagement>
-    <repository>
-      <id>absflow maven repository</id>
-      <url>scpexe://absflow.com:21098/home/absfhhwv/public_html/mavenrepo</url>
-    </repository>
-  </distributionManagement>
   
-  <dependencies>
+	<distributionManagement>
+
+    	<!-- maven repository for deploying project artifacts -->
+    	<repository>
+      		<id>org.restflow</id>
+      		<name>restflow.org maven repository</name>
+      		<url>${org.restflow.deployment.url}</url>
+    	</repository>
+
+  	</distributionManagement>
   
-  	<dependency>
-  	  <groupId>org.restflow</groupId>
-	  <artifactId>RestFlow</artifactId>
- 	  <version>1.0</version>
- 	</dependency>
-
-  	<dependency>
-  	  <groupId>org.restflow</groupId>
-	  <artifactId>RestFlow</artifactId>
- 	  <version>1.0</version>
- 	  <classifier>tests</classifier>
- 	</dependency>
-
-    <dependency> 
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-context</artifactId>
-      <version>3.1.2.RELEASE</version>
-    </dependency>
-
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-    </dependency>
-
-    <dependency>
-      <groupId>net.jcip</groupId>
-      <artifactId>jcip-annotations</artifactId>
-      <version>1.0</version>
-    </dependency>
-
-	<dependency>
-		<groupId>com.google.code.gson</groupId>
-		<artifactId>gson</artifactId>
-		<version>2.2.2</version>
-	</dependency>
+  
+	<dependencies>
+  		
+	  	<dependency>
+	  		<groupId>org.restflow</groupId>
+			<artifactId>RestFlow</artifactId>
+	 		<version>1.0</version>
+	 	</dependency>
 	
-	<dependency>
-	  <groupId>Newtonsoft</groupId>
-	  <artifactId>Json</artifactId>
-	  <version>4.5.11</version>
-	</dependency>
+	  	<dependency>
+	  		<groupId>org.restflow</groupId>
+			<artifactId>RestFlow</artifactId>
+	 		<version>1.0</version>
+	 		<classifier>tests</classifier>
+	 	</dependency>
+	
+	    <dependency> 
+	    	<groupId>org.springframework</groupId>
+	    	<artifactId>spring-context</artifactId>
+	    	<version>3.1.2.RELEASE</version>
+	    </dependency>
+	
+	    <dependency>
+	    	<groupId>junit</groupId>
+	    	<artifactId>junit</artifactId>
+	    	<version>3.8.1</version>
+	    </dependency>
+	
+	    <dependency>
+	    	<groupId>net.jcip</groupId>
+	    	<artifactId>jcip-annotations</artifactId>
+	    	<version>1.0</version>
+	    </dependency>
+	
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+	
+		<dependency>
+			<groupId>org.absflow</groupId>
+	  		<artifactId>json-net</artifactId>
+	  		<version>4.5.11</version>
+		</dependency>
 
-  </dependencies>
+	</dependencies>
 
-<build>
 
-    <extensions>
-      <extension>
-        <groupId>org.apache.maven.wagon</groupId>
-         <artifactId>wagon-ssh-external</artifactId>
-         <version>2.4</version>
-      </extension>
-    </extensions>
+	<build>
+	
+		<extensions>
 
-	<plugins>
+    		<!-- enable artifact deployment via scp -->
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ssh-external</artifactId>
+				<version>2.4</version>
+			</extension>
+			
+		</extensions>
+	
+		<plugins>
 	
     		<!-- Set Java compiler source and target versions -->
     		<plugin>
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-compiler-plugin</artifactId>
-			<version>2.3.2</version>
-			<configuration>
-				<source>1.7</source>
-				<target>1.7</target>
-			</configuration>
-		</plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			
+			</plugin>
 		
-		<plugin>
-		    <groupId>org.apache.maven.plugins</groupId>
-		    <artifactId>maven-dependency-plugin</artifactId>
-		    <version>2.2</version>
-		    <executions>
-		      <execution>
-		        <id>Newtonsoft.Json</id>
-		        <phase>compile</phase>
-		        <goals>
-		          <goal>unpack-dependencies</goal>
-		        </goals>
-		        <configuration>
-		          <includeGroupIds>Newtonsoft</includeGroupIds>
-		          <includeArtifactIds>Json</includeArtifactIds>
-		          <outputDirectory>
-		             ${user.home}/.m2/dll
-		          </outputDirectory>
-		        </configuration>
-		      </execution>
-		    </executions>
-		</plugin>
-	</plugins>
-</build>
+			<!-- expand jars containing .NET assemblies into .m2/dll directory during compile phase -->
+			<plugin>			
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.2</version>
+				<executions>
+					<!-- json.net -->
+					<execution>
+				    	<id>json-net</id>
+				        <phase>compile</phase>
+				        <goals>
+				        	<goal>unpack-dependencies</goal>
+				        </goals>
+				        <configuration>
+				          	<includeGroupIds>org.absflow</includeGroupIds>
+				          	<includeArtifactIds>json-net</includeArtifactIds>
+				          	<outputDirectory>${user.home}/.m2/dll</outputDirectory>
+				       	</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			
+		</plugins>
+	</build>
 
-  <reporting>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-report-plugin</artifactId>
-        <version>2.13</version>
-      </plugin>
-    </plugins>
-  </reporting>
+  	<reporting>
+    	<plugins>
+      		<plugin>
+        		<groupId>org.apache.maven.plugins</groupId>
+        		<artifactId>maven-surefire-report-plugin</artifactId>
+        		<version>2.13</version>
+      		</plugin>
+    	</plugins>
+  	</reporting>
   
-<licenses>
-  <license>
-    <name>MIT Style License</name>
-    <url>http://www.restflow.org/restflow/license/LICENSE.txt</url>
-  </license>
-</licenses>      
-
+	<licenses>
+  		<license>
+    		<name>MIT Style License</name>
+    		<url>http://www.restflow.org/restflow/license/LICENSE.txt</url>
+  		</license>
+	</licenses> 
+  
 </project>
