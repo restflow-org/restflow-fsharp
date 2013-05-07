@@ -11,7 +11,7 @@ public class FSharpActor extends AugmentedScriptActor {
 			System.getProperty("user.home").replaceAll("\\\\", "/") + "/.m2/dll";
 
 	public static final String JSON_NET_DLL_REFERENCE =
-			"#r \"" + MAVEN_CACHE_DLL_DIR + "/Newtonsoft/Json/Newtonsoft.Json.dll\"";
+			"#r \"" + MAVEN_CACHE_DLL_DIR + "/org/absflow/json-net/Newtonsoft.Json.dll\"";
 	
 	@Override
 	public ActorScriptBuilder getNewScriptBuilder() {
