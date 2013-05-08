@@ -9,7 +9,7 @@ public class TestFSharpActorScriptBuilder extends RestFlowTestCase {
 
 	public void testAppendCode() throws Exception {
 
-		ActorScriptBuilder builder = new FSharpActor.ScriptBuilder();
+		ActorScriptBuilder builder = (new FSharpActor()).getNewScriptBuilder();
 		
 		assertEquals(
 			"", 
@@ -35,7 +35,7 @@ public class TestFSharpActorScriptBuilder extends RestFlowTestCase {
 	
 	public void testAppendSeparator() throws Exception {
 
-		ActorScriptBuilder builder = new FSharpActor.ScriptBuilder();
+		ActorScriptBuilder builder = (new FSharpActor()).getNewScriptBuilder();
 		
 		builder.appendCode("Some code");
 		builder.appendSeparator();
@@ -51,7 +51,7 @@ public class TestFSharpActorScriptBuilder extends RestFlowTestCase {
 	
 	public void testAppendBlankLine() throws Exception {
 
-		ActorScriptBuilder builder = new FSharpActor.ScriptBuilder();
+		ActorScriptBuilder builder = (new FSharpActor()).getNewScriptBuilder();
 		
 		builder.appendCode("Some code");
 		builder.appendBlankLine();
@@ -67,7 +67,7 @@ public class TestFSharpActorScriptBuilder extends RestFlowTestCase {
 
 	public void testAppendComment() throws Exception {
 
-		ActorScriptBuilder builder = new FSharpActor.ScriptBuilder();
+		ActorScriptBuilder builder = (new FSharpActor()).getNewScriptBuilder();
 		
 		builder.appendCode("Some code");
 		builder.appendComment("A comment");
@@ -83,7 +83,7 @@ public class TestFSharpActorScriptBuilder extends RestFlowTestCase {
 
 	private void _testAppendLiteralAssignment(String name, Object value, String type, boolean mutable, boolean nullable, String expected) throws Exception {
 
-		ActorScriptBuilder builder = new FSharpActor.ScriptBuilder();
+		ActorScriptBuilder builder = (new FSharpActor()).getNewScriptBuilder();
 		
 		builder.appendLiteralAssignment(name, value, type, mutable, nullable);
 		assertEquals(expected, builder.toString()
@@ -530,7 +530,7 @@ public class TestFSharpActorScriptBuilder extends RestFlowTestCase {
 
 	public void testAppendPrintStringStatement() {
 
-		ActorScriptBuilder builder = new FSharpActor.ScriptBuilder();
+		ActorScriptBuilder builder = (new FSharpActor()).getNewScriptBuilder();
 		
 		builder.appendPrintStringStatement("string to print");
 		
@@ -542,7 +542,7 @@ public class TestFSharpActorScriptBuilder extends RestFlowTestCase {
 	
 	public void testAppendVariableYamlPrintStatement_StringType() {
 		
-		ActorScriptBuilder builder = new FSharpActor.ScriptBuilder();
+		ActorScriptBuilder builder = (new FSharpActor()).getNewScriptBuilder();
 		
 		builder.appendVariableSerializationStatement("var_with_string_type", "String");
 		
@@ -554,7 +554,7 @@ public class TestFSharpActorScriptBuilder extends RestFlowTestCase {
 
 	public void testAppendVariableYamlPrintStatement_IntegerType() {
 		
-		ActorScriptBuilder builder = new FSharpActor.ScriptBuilder();
+		ActorScriptBuilder builder = (new FSharpActor()).getNewScriptBuilder();
 		
 		builder.appendVariableSerializationStatement("var_with_integer_type", "Integer");
 		
@@ -566,7 +566,7 @@ public class TestFSharpActorScriptBuilder extends RestFlowTestCase {
 
 	public void testAppendVariableYamlPrintStatement_BooleanType() {
 		
-		ActorScriptBuilder builder = new FSharpActor.ScriptBuilder();
+		ActorScriptBuilder builder = (new FSharpActor()).getNewScriptBuilder();
 		
 		builder.appendVariableSerializationStatement("var_with_boolean_type", "Boolean");
 		

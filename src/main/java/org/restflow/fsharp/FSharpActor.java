@@ -11,7 +11,9 @@ public class FSharpActor extends AugmentedScriptActor {
 			System.getProperty("user.home").replaceAll("\\\\", "/") + "/.m2/dll";
 
 	public static final String JSON_NET_DLL_REFERENCE =
-			"#r \"" + MAVEN_CACHE_DLL_DIR + "/Newtonsoft/Json/Newtonsoft.Json.dll\"";
+			"#r \"" + MAVEN_CACHE_DLL_DIR + "/org/absflow/json-net/Newtonsoft.Json.dll\"";
+
+	private String[] _assemblies = null;
 	
 	@Override
 	public ActorScriptBuilder getNewScriptBuilder() {
@@ -38,7 +40,11 @@ public class FSharpActor extends AugmentedScriptActor {
 		}
 	}
 	
-	public static class ScriptBuilder implements ActorScriptBuilder {
+	public void setAssemblies(String[] assemblies) {
+		_assemblies = assemblies;
+	}
+	
+	public class ScriptBuilder implements ActorScriptBuilder {
 
 		private StringBuilder _script = new StringBuilder();
 
@@ -71,6 +77,13 @@ public class FSharpActor extends AugmentedScriptActor {
 			appendComment(		"reference required assemblies"									);
 			appendCode(			JSON_NET_DLL_REFERENCE											);
 			appendBlankLine();
+			
+			if (_assemblies != null) {
+				for (String path : _assemblies) {
+					_script.append("#r \"" + MAVEN_CACHE_DLL_DIR + path + "\""			+ EOL	);
+
+				}
+			}
 			
 			appendComment(		"access namespaces"												);
 			_script.append(		"open System"											+ EOL	)
