@@ -5,7 +5,7 @@ import org.restflow.test.WorkflowTestCase;
 public class TestWorkflowsFSharp extends WorkflowTestCase {
 
 	public TestWorkflowsFSharp() {
-		super("workflows");
+		super("org/restflow/test/TestWorkflows");
 	}
 	
 	@Override
