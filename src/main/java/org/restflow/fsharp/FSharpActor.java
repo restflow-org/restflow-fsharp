@@ -285,6 +285,12 @@ public class FSharpActor extends AugmentedScriptActor {
 			return this;
 		}
 		
+		@Override
+		public ActorScriptBuilder appendOutputVariableSerializationStatement(
+				String name, String type) {
+			return appendVariableSerializationStatement(name, type);
+		}
+
 		
 		public String toString() {
 
