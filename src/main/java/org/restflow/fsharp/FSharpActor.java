@@ -48,6 +48,11 @@ public class FSharpActor extends AugmentedScriptActor {
 
 		private StringBuilder _script = new StringBuilder();
 
+		public ActorScriptBuilder append(String text) {
+			_script.append(		text	);
+			return this;
+		}
+		
 		public ActorScriptBuilder appendCode(String code) {
 			_script.append(		code	)
 				   .append(		EOL		);
